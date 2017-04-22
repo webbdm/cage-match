@@ -1,0 +1,38 @@
+body{
+  background:url("https://upload.wikimedia.org/wikipedia/commons/c/c4/Kenny_King_vs._Zema_Ion_-_Dark_Match.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.error {
+    display: none;
+    color: red;
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 100px;
+    color: white;
+}
+
+.gravatar {
+    height: 200px;
+    width: 200px;
+}
+
+.container {
+    text-align: center;
+}
+
+.thumbnail h3,
+h1 {
+    text-align: center;
+}
+
+.inputs {
+    margin: 50px 5px;
+}
+
+.btn {
+    display: block;
+}

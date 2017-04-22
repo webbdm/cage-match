@@ -6,19 +6,23 @@
     <title>Cage Match</title>
     <!-- Third Party Link Tags -->
     <link rel="stylesheet" href="./lib/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <!-- Personal Link Tags -->
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 
 <body>
-    <h1>Cage Match</h1>
-
-        <input type="text" class="" id="userName1" placeholder="Username" aria-describedby="basic-addon1">
-        <input type="text" class="" id="userName2" placeholder="Username" aria-describedby="basic-addon1">
-        <button type="button" class="btn btn-danger" id="button">FIGHT</button>
- 
-
+    <div class="container">
+        <h1 class="title">CAGE MATCH</h1>
+        <div class="col-md-12 inputs">
+            <input type="text" class="" id="userName1" placeholder="Contender 1" aria-describedby="basic-addon1">
+            <input type="text" class="" id="userName2" placeholder="Contender 2" aria-describedby="basic-addon1">
+            <button type="button" class="btn btn-danger" id="button">FIGHT</button>
+            <h5 id="errorMessage" class="error">Please Enter 2 Valid Usernames</h5>
+        </div>
+    </div>
     <div class="container" id="output"></div>
+    <!-- Third Party Script Tags -->
     <!-- Third Party Script Tags -->
     <script type="text/javascript" src="./lib/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="./lib/bower_components/bootstrap/dist/js/bootstrap.js"></script>
