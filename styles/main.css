@@ -1,6 +1,6 @@
-body{
-  background:url("https://upload.wikimedia.org/wikipedia/commons/c/c4/Kenny_King_vs._Zema_Ion_-_Dark_Match.jpg") no-repeat center center fixed;
-  background-size: cover;
+body {
+    background: url("https://upload.wikimedia.org/wikipedia/commons/c/c4/Kenny_King_vs._Zema_Ion_-_Dark_Match.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
 .error {
@@ -24,9 +24,25 @@ body{
     text-align: center;
 }
 
+.battleArea {
+    background-color: rgba(152, 31, 31, 0.79);
+}
+
+.thumbnail {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+}
+
+.thumbnail img {
+    border-radius: 100px;
+    border-color: red;
+}
+
 .thumbnail h3,
 h1 {
     text-align: center;
+    color: white;
 }
 
 .inputs {
@@ -35,4 +51,9 @@ h1 {
 
 .btn {
     display: block;
+}
+
+.win {
+    color: green;
+    display: none;
 }

@@ -24,17 +24,18 @@ $(document).ready(function() {
 
     const buildUser = (user) => {
         let domString = "";
-        domString += ` <div class="col-md-6 thumbnail">
-                      <h3>${user.name}</h3>
+        domString += `<div class="col-md-6 thumbnail">
+                      <h3 class-"name">${user.name}</h3>
                       <img src=${user.gravatar_url} class="gravatar" alt="image">
                       <h2>${user.points.total} Points</h2>
-                      <h3 id="win">WINNER</h3>
-                  </div>`;
+                      <h1 id="win" class="win win-shown">WINNER</h1>
+                      </div>`;
         return domString;
     };
 
-    const invalidUsername = () => {
+    const invalidUsername = (error) => {
         $("#errorMessage").show();
+        console.log(error);
     };
 
     $("button").click(function() {
@@ -53,15 +54,17 @@ $(document).ready(function() {
                 outputContainer.append(printUsers(loadedUser1, loadedUser2));
 
                 if (loadedUser1.points.total > loadedUser2.points.total) {
-                    console.log($("#contestants").children().first());
+                    leftWinner = $("#contestants").children().first();
+                    leftWinner.find("#win").show();
 
-                } else {
-                    console.log($("#contestants").children().second());
+                } else if (loadedUser2.points.total > loadedUser1.points.total) {
+                    rightWinner = $("#contestants").children().first().next();
+                    rightWinner.find("#win").show();
                 };
 
             })
             .catch(function(error) {
-                invalidUsername()
+                invalidUsername(error);
             });
     };
 });
