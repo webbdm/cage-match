@@ -22,14 +22,24 @@ $(document).ready(function() {
         return newString;
     };
 
+    const printBadges = (userBadges) => {
+        let badgeBox = "";
+        userBadges.reverse();
+        userBadges.forEach((badge) => {
+            badgeBox += `<img src=${badge.icon_url} alt=${badge.name}>`;
+        });
+        return badgeBox;
+    };
+
     const buildUser = (user) => {
         let domString = "";
         domString += `<div class="col-md-6 thumbnail">
-                      <h3 class-"name">${user.name}</h3>
-                      <img src=${user.gravatar_url} class="gravatar" alt="image">
-                      <h2>${user.points.total} Points</h2>
-                      <h1 id="win" class="win win-shown">WINNER</h1>
-                      </div>`;
+                  <h3 class="name" id="name">${user.name}</h3>
+                  <img src=${user.gravatar_url} class="gravatar" alt="image">
+                  <h2>${user.points.total} Points</h2>
+                  <h1 id="win" class="win">WINNER</h1>
+                  <div id="badges" class="badges"></div>
+                  </div>`;
         return domString;
     };
 
@@ -38,7 +48,30 @@ $(document).ready(function() {
         console.log(error);
     };
 
-    $("button").click(function() {
+    const animateMatch = (winner, loser) => {
+        winner.find("#win").delay(300).animate({
+            color: "crimson",
+            backgroundColor: "green"
+        }, "slow");
+        $(".battleArea").delay(2000).animate({
+            height: "520px",
+            overflow: "scroll"
+        });
+        winner.find("#badges img").delay(3000).effect("shake");
+        winner.find("#badges").delay(2500).animate({
+            height: "200px"
+        });
+        loser.find("#badges").delay(300).animate({
+            fontSize: "70px",
+        }, "slow");
+        loser.find("#badges").delay(300).text("LOSER");
+        loser.delay(2000).effect("explode");
+        winner.delay(2000).animate({
+            width: "100%"
+        });
+    };
+
+    $("button").click(() => {
         outputContainer.empty();
         $("#errorMessage").hide();
         let userInput1 = $("#userName1").val();
@@ -53,17 +86,21 @@ $(document).ready(function() {
                 let loadedUser2 = result[1];
                 outputContainer.append(printUsers(loadedUser1, loadedUser2));
 
-                if (loadedUser1.points.total > loadedUser2.points.total) {
-                    leftWinner = $("#contestants").children().first();
-                    leftWinner.find("#win").show();
+                let leftUser = $("#contestants").children().first();
+                let rightUser = $("#contestants").children().first().next();
 
+                if (loadedUser1.points.total > loadedUser2.points.total) {
+                    leftUser.find("#win").show();
+                    leftUser.find("#badges").append(printBadges(loadedUser1.badges));
+                    animateMatch(leftUser, rightUser);
                 } else if (loadedUser2.points.total > loadedUser1.points.total) {
-                    rightWinner = $("#contestants").children().first().next();
-                    rightWinner.find("#win").show();
-                };
+                    rightUser.find("#win").fadeIn(100).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+                    rightUser.find("#badges").append(printBadges(loadedUser2.badges));
+                    animateMatch(rightUser, leftUser);
+                }
 
             })
-            .catch(function(error) {
+            .catch((error) => {
                 invalidUsername(error);
             });
     };
